@@ -9,8 +9,6 @@ Color primaryColor = const Color(0xff008352);
 final requriedValidation =
     RequiredValidator(errorText: "This field is requried");
 
-// const googleMapsApi = "AIzaSyBehQ0Ci-Fk9v4YB1_s--VKVuest60UmpE";
-
 showBottomSheets({
   void Function()? onTapCamera,
   void Function()? onTapGallery,
