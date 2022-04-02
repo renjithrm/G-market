@@ -28,28 +28,47 @@ class CartScreen extends StatelessWidget {
             return FutureBuilder(
                 future: _getCartController.getCartProduct(),
                 builder: (context, snapshot) {
-                  return ListView.separated(
-                      itemBuilder: (context, index) {
-                        return CartCardWidget(
-                          index: index,
-                          cartModel: _getCartController.cartModel,
+                  return _getCartController.cartModel.isNotEmpty
+                      ? ListView.separated(
+                          itemBuilder: (context, index) {
+                            return CartCardWidget(
+                              index: index,
+                              cartModel: _getCartController.cartModel,
+                            );
+                          },
+                          separatorBuilder: (context, index) => const SizedBox(
+                                height: 10,
+                              ),
+                          itemCount: _getCartController.cartModel.length)
+                      : SizedBox(
+                          child: Center(
+                              child: Column(
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 100,
+                              ),
+                              Image.asset("assets/cart_image.png"),
+                              Text(
+                                "Add item to cart",
+                                style: GoogleFonts.roboto(
+                                    fontWeight: FontWeight.bold, fontSize: 30),
+                              )
+                            ],
+                          )),
                         );
-                      },
-                      separatorBuilder: (context, index) => const SizedBox(
-                            height: 10,
-                          ),
-                      itemCount: _getCartController.cartModel.length);
                 });
           },
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: primaryColor,
-          onPressed: () {},
-          label: Text(
-            "Buy Now",
-            style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
-          )),
+      floatingActionButton: _getCartController.cartModel.isNotEmpty
+          ? FloatingActionButton.extended(
+              backgroundColor: primaryColor,
+              onPressed: () {},
+              label: Text(
+                "Buy Now",
+                style: GoogleFonts.roboto(fontWeight: FontWeight.bold),
+              ))
+          : Container(),
     );
   }
 }

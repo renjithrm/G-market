@@ -22,6 +22,11 @@ class ApiLink {
 
   final SEARCH_PRODUCT_ALL_STORE = "/product/search/";
 
+//Store id
+  final SEARCH_PRODUCT_INSIDE_STORE = "/product/search-products/";
+
 // product id and store id
   final GET_SINGLE_PRODUCT = "/product/";
+
+  final GET_ALL_PRODUCT_ALL_STORE = "/product/products";
 }

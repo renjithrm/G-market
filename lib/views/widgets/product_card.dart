@@ -4,30 +4,36 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:user_app/constant/const.dart';
 import 'package:user_app/controller/cart_items_controller.dart';
 import 'package:user_app/controller/get_cart_products.dart';
+import 'package:user_app/controller/single_product_controller.dart';
 import 'package:user_app/models/get_all_product_model.dart';
 import 'package:user_app/views/screens/single_product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   List<GetAllProductModel> allProducts;
   int index;
+  String storeId;
 
-  ProductCard({
-    Key? key,
-    required this.allProducts,
-    required this.index,
-  }) : super(key: key);
+  ProductCard(
+      {Key? key,
+      required this.allProducts,
+      required this.index,
+      required this.storeId})
+      : super(key: key);
 
   final _cartController = Get.put(CartController());
   final _getCartProduct = Get.find<GetCartProductController>();
+
+  final _singleProductDetails = Get.put(SingleProductController());
 
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () async {
+        var response = await _singleProductDetails.getProductDetails(
+            storeId: storeId, productId: allProducts[index].id ?? "");
         await Get.to(ProductDetailsScreen(
-          allProducts: allProducts,
-          index: index,
+          productDetail: response,
         ));
       },
       child: Card(

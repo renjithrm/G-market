@@ -20,7 +20,9 @@ class ShopCard extends StatelessWidget {
       onTap: () async {
         await _getAllProduct.getAllProducts(shopeList[index].id ?? "");
         await Get.to(ProductScreen(
-            shopeName: shopeList[index].storename ?? "All Products"));
+          shopeName: shopeList[index].storename ?? "All Products",
+          storeId: shopeList[index].id ?? "",
+        ));
       },
       child: Padding(
         padding: const EdgeInsets.all(10.0),

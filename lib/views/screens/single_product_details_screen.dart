@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 import 'package:user_app/constant/const.dart';
-import 'package:user_app/models/get_all_product_model.dart';
+import 'package:user_app/models/single_product_model.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  List<GetAllProductModel> allProducts;
-  int index;
-  ProductDetailsScreen(
-      {Key? key, required this.allProducts, required this.index})
-      : super(key: key);
+  // List<GetAllProductModel> allProducts;
+  // int index;
+  ProductDetailsModel productDetail;
+  ProductDetailsScreen({
+    Key? key,
+    required this.productDetail,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,21 +21,21 @@ class ProductDetailsScreen extends StatelessWidget {
       Image(
         width: _size.width * 0.8,
         height: _size.height * 0.4,
-        image: NetworkImage(allProducts[index].image1 ??
+        image: NetworkImage(productDetail.product?.image1 ??
             "https://i.pinimg.com/564x/0c/1b/11/0c1b113aca1fd52110dd07162e319895.jpg"),
         fit: BoxFit.cover,
       ),
       Image(
         width: _size.width * 0.8,
         height: _size.height * 0.4,
-        image: NetworkImage(allProducts[index].image2 ??
+        image: NetworkImage(productDetail.product?.image2 ??
             "https://i.pinimg.com/564x/0c/1b/11/0c1b113aca1fd52110dd07162e319895.jpg"),
         fit: BoxFit.cover,
       ),
       Image(
         width: _size.width * 0.8,
         height: _size.height * 0.4,
-        image: NetworkImage(allProducts[index].image3 ??
+        image: NetworkImage(productDetail.product?.image3 ??
             "https://i.pinimg.com/564x/0c/1b/11/0c1b113aca1fd52110dd07162e319895.jpg"),
         fit: BoxFit.cover,
       ),
@@ -42,7 +44,7 @@ class ProductDetailsScreen extends StatelessWidget {
       backgroundColor: Colors.grey,
       appBar: AppBar(
         backgroundColor: primaryColor,
-        title: Text(allProducts[index].productname ?? "Product name"),
+        title: Text(productDetail.product?.productname ?? "Product name"),
       ),
       body: Container(
         padding: const EdgeInsets.all(10.0),
@@ -61,7 +63,7 @@ class ProductDetailsScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              allProducts[index].productname ?? "Product name",
+              productDetail.product?.productname ?? "Product name",
               style: GoogleFonts.roboto(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -71,7 +73,7 @@ class ProductDetailsScreen extends StatelessWidget {
               height: 20,
             ),
             Text(
-              "${allProducts[index].description}",
+              "${productDetail.product?.description}",
               style: GoogleFonts.roboto(
                 fontSize: 18,
               ),
@@ -90,11 +92,11 @@ class ProductDetailsScreen extends StatelessWidget {
               height: 20,
             ),
             rowDetails(
-              price: "${allProducts[index].amount} Rs",
-              quantity: "${allProducts[index].units}",
-              units: "${allProducts[index].units} left",
-              categorys: "${allProducts[index].category}",
-              expired: "${allProducts[index].exprmonths}",
+              price: "${productDetail.product?.amount} Rs",
+              quantity: "${productDetail.product?.units}",
+              units: "${productDetail.product?.units} left",
+              categorys: "${productDetail.product?.category}",
+              expired: "${productDetail.product?.exprmonths}",
             ),
             const Spacer(),
             Row(
