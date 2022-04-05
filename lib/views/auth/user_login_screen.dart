@@ -28,8 +28,8 @@ class AuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var keybord = MediaQuery.of(context).viewInsets.bottom != 0;
     var _size = MediaQuery.of(context).size;
-    print(_size.width);
-    print(_size.height);
+    // print(_size.width);
+    // print(_size.height);
     return Scaffold(
         body: Container(
       width: _size.width,
@@ -46,7 +46,7 @@ class AuthScreen extends StatelessWidget {
       child: Column(children: [
         Expanded(
           flex: keybord ? 1 : 2,
-          child: Container(
+          child: SizedBox(
             child: Row(
               children: [
                 Expanded(
@@ -185,39 +185,5 @@ class AuthScreen extends StatelessWidget {
         )
       ]),
     ));
-  }
-
-  Widget formField(
-      {TextEditingController? controller,
-      TextInputType? keyboardType,
-      String? Function(String?)? validator,
-      String? hindText,
-      Icon? icon,
-      Widget? suffixIcon,
-      bool? obscureText}) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 8,
-        bottom: 8,
-      ),
-      child: TextFormField(
-        controller: controller,
-        keyboardType: keyboardType,
-        validator: validator,
-        decoration: InputDecoration(
-            border: OutlineInputBorder(
-                borderSide: BorderSide.none,
-                borderRadius: BorderRadius.circular(20)),
-            focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.transparent),
-                borderRadius: BorderRadius.circular(20)),
-            filled: true,
-            fillColor: Colors.grey[400],
-            hintText: hindText,
-            prefixIcon: icon,
-            suffixIcon: suffixIcon),
-        obscureText: obscureText ?? false,
-      ),
-    );
   }
 }

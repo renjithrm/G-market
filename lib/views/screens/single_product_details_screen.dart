@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:swipe_deck/swipe_deck.dart';
 import 'package:user_app/constant/const.dart';
+import 'package:user_app/constant/enums.dart';
+import 'package:user_app/controller/get_all_store_products.dart';
+import 'package:user_app/models/get_all_product_model.dart';
 import 'package:user_app/models/single_product_model.dart';
+import 'package:user_app/views/screens/cart_screen.dart';
+import 'package:user_app/views/widgets/product_card.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
-  // List<GetAllProductModel> allProducts;
+  List<GetAllProductModel>? allProducts;
   // int index;
   ProductDetailsModel productDetail;
+  Enum screen;
   ProductDetailsScreen({
     Key? key,
     required this.productDetail,
+    required this.screen,
+    this.allProducts,
   }) : super(key: key);
 
   @override
@@ -45,94 +55,128 @@ class ProductDetailsScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: primaryColor,
         title: Text(productDetail.product?.productname ?? "Product name"),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await Get.to(CartScreen());
+            },
+            icon: const FaIcon(FontAwesomeIcons.cartPlus),
+          )
+        ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              width: _size.width,
-              height: _size.height * 0.4,
-              alignment: Alignment.center,
-              child: SwipeDeck(
-                widgets: widgetList,
-                cardSpreadInDegrees: 18.0,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              productDetail.product?.productname ?? "Product name",
-              style: GoogleFonts.roboto(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              "${productDetail.product?.description}",
-              style: GoogleFonts.roboto(
-                fontSize: 18,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Product Details",
-              style: GoogleFonts.roboto(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            rowDetails(
-              price: "${productDetail.product?.amount} Rs",
-              quantity: "${productDetail.product?.units}",
-              units: "${productDetail.product?.units} left",
-              categorys: "${productDetail.product?.category}",
-              expired: "${productDetail.product?.exprmonths}",
-            ),
-            const Spacer(),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                Container(
-                  width: _size.width * 0.4,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => states.contains(MaterialState.pressed)
-                          ? Colors.grey
-                          : primaryColor,
-                    )),
-                    onPressed: () {},
-                    child: const Text("Buy now"),
-                  ),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: _size.width,
+                height: _size.height * 0.4,
+                alignment: Alignment.center,
+                child: SwipeDeck(
+                  widgets: widgetList,
+                  cardSpreadInDegrees: 18.0,
                 ),
-                Container(
-                  width: _size.width * 0.4,
-                  height: 60,
-                  child: ElevatedButton(
-                    style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.resolveWith(
-                      (states) => states.contains(MaterialState.pressed)
-                          ? Colors.grey
-                          : primaryColor,
-                    )),
-                    onPressed: () {},
-                    child: const Text("Add to cart"),
-                  ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                productDetail.product?.productname ?? "Product name",
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
                 ),
-              ],
-            )
-          ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "${productDetail.product?.description}",
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                "Product Details",
+                style: GoogleFonts.roboto(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              rowDetails(
+                price: "${productDetail.product?.amount} Rs",
+                quantity: "${productDetail.product?.units}",
+                units: "${productDetail.product?.units} left",
+                categorys: "${productDetail.product?.category}",
+                expired: "${productDetail.product?.exprmonths}",
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    width: _size.width * 0.4,
+                    height: 60,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => states.contains(MaterialState.pressed)
+                            ? Colors.grey
+                            : primaryColor,
+                      )),
+                      onPressed: () {},
+                      child: const Text("Buy now"),
+                    ),
+                  ),
+                  Container(
+                    width: _size.width * 0.4,
+                    height: 60,
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.resolveWith(
+                        (states) => states.contains(MaterialState.pressed)
+                            ? Colors.grey
+                            : primaryColor,
+                      )),
+                      onPressed: () {},
+                      child: const Text("Add to cart"),
+                    ),
+                  ),
+                ],
+              ),
+              screen == SingleProductScreen.allProductsScreen
+                  ? const SizedBox(
+                      height: 40,
+                    )
+                  : Container(),
+              screen == SingleProductScreen.allProductsScreen
+                  ? ListView.separated(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ProductCard(
+                            allProducts: allProducts ?? [],
+                            index: index,
+                            storeId: productDetail.store!.id ?? "");
+                      },
+                      separatorBuilder: (context, index) => const SizedBox(
+                            height: 20,
+                          ),
+                      itemCount: Get.find<GetAllShopeProductController>()
+                          .resposeMode
+                          .length)
+                  : Container(),
+            ],
+          ),
         ),
       ),
     );

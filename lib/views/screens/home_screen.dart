@@ -7,6 +7,7 @@ import 'package:user_app/controller/all_sotre_product_controller.dart';
 import 'package:user_app/controller/get_all_store.dart';
 import 'package:user_app/controller/get_builder_controller.dart';
 import 'package:user_app/controller/get_cart_products.dart';
+import 'package:user_app/controller/get_user_deatails_controller.dart';
 import 'package:user_app/controller/get_user_location_controller.dart';
 import 'package:user_app/controller/search_all_store_controller.dart';
 import 'package:user_app/views/screens/all_shop_scree.dart';
@@ -21,6 +22,7 @@ class HomeScreen extends StatelessWidget {
   final _controller = Get.put(Controller());
   final _getAllStoreController = Get.put(GetAllStoresController());
   final _getCartController = Get.put(GetCartProductController());
+  final _getUserDetails = Get.put(GetUserdetails());
 
   final _searchAllStoreController = Get.put(SearchAllStoreController());
 

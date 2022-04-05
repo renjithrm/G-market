@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_app/constant/const.dart';
+import 'package:user_app/constant/enums.dart';
 import 'package:user_app/controller/cart_items_controller.dart';
 import 'package:user_app/controller/get_cart_products.dart';
 import 'package:user_app/controller/single_product_controller.dart';
@@ -25,6 +26,8 @@ class ProductCard extends StatelessWidget {
 
   final _singleProductDetails = Get.put(SingleProductController());
 
+  final _getAllCart = Get.find<GetCartProductController>();
+
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -32,8 +35,10 @@ class ProductCard extends StatelessWidget {
       onTap: () async {
         var response = await _singleProductDetails.getProductDetails(
             storeId: storeId, productId: allProducts[index].id ?? "");
+        if (response == null) return;
         await Get.to(ProductDetailsScreen(
           productDetail: response,
+          screen: SingleProductScreen.singleShopsScreen,
         ));
       },
       child: Card(
@@ -109,20 +114,24 @@ class ProductCard extends StatelessWidget {
                                               .isEmpty
                                           ? InkWell(
                                               onTap: () async {
-                                                await _cartController
-                                                    .addItemToCart(
-                                                        allProducts[index]
-                                                            .storeid
-                                                            .toString(),
-                                                        allProducts[index]
-                                                            .id
-                                                            .toString());
+                                                var response =
+                                                    await _cartController
+                                                        .addItemToCart(
+                                                            allProducts[index]
+                                                                .storeid
+                                                                .toString(),
+                                                            allProducts[index]
+                                                                .id
+                                                                .toString());
+
                                                 Get.find<
                                                         GetCartProductController>()
                                                     .update([
                                                   "cartScreen",
                                                   "cartButton"
                                                 ]);
+                                                if (response == null) return;
+
                                                 Get.snackbar(
                                                     allProducts[index]
                                                             .productname ??

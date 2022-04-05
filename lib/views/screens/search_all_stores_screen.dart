@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:user_app/controller/all_sotre_product_controller.dart';
@@ -29,13 +27,12 @@ class SearchFromAllStore extends StatelessWidget {
                                   productName: item.productname ?? "error",
                                   price: item.amount.toString(),
                                   units: item.units.toString(),
-                                  storeName: controller.searchModel[index]
-                                          .store!.storename ??
-                                      "error",
+                                  store: controller.searchModel[index].store!,
+                                  productId: item.id,
                                 ))
                             .toList();
 
-                        log(widget.toString());
+                        // log(widget.toString());
 
                         return Column(
                           children: widget,
@@ -57,15 +54,13 @@ class SearchFromAllStore extends StatelessWidget {
                                       productName: item.productname ?? "error",
                                       price: item.amount.toString(),
                                       units: item.units.toString(),
-                                      storeName: _getAllProduct
-                                              .allStoreAndProducts[index]
-                                              .store!
-                                              .storename ??
-                                          "error",
+                                      store: _getAllProduct
+                                          .allStoreAndProducts[index].store!,
+                                      productId: item.id,
                                     ))
                                 .toList();
 
-                        log(widget.toString());
+                        //  log(widget.toString());
 
                         return Column(
                           children: widget,

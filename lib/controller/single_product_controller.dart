@@ -7,7 +7,7 @@ class SingleProductController extends GetxController {
   final _apiService = ApiServics();
   final _apiLinks = ApiLink();
 
-  Future getProductDetails(
+  Future<ProductDetailsModel?> getProductDetails(
       {required String storeId, required String productId}) async {
     var response = await _apiService
         .getRespose(_apiLinks.GET_SINGLE_PRODUCT + storeId + "/" + productId);

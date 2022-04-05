@@ -5,7 +5,7 @@ import 'package:user_app/constant/globel_keys.dart';
 import 'package:user_app/service/shared_preference.dart';
 import 'package:user_app/views/auth/wraper.dart';
 import 'package:user_app/views/screens/home_screen.dart';
-import 'package:user_app/views/screens/product_screen.dart';
+import 'package:user_app/views/screens/payment_screen.dart';
 import 'package:user_app/views/screens/profile_screen.dart';
 
 void main() async {
@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
         "/home": (cntx) => HomeScreen(),
         "/swtich": (cntx) => Warper(),
         "/profile": (cntx) => ProfileScreen(),
+        "/payment": (cntx) => PaymentScreen(),
       },
       initialRoute: id == null ? "/swtich" : "/home",
       debugShowCheckedModeBanner: false,

@@ -1,0 +1,4 @@
+enum SingleProductScreen {
+  allProductsScreen,
+  singleShopsScreen,
+}

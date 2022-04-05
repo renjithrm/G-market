@@ -9,6 +9,9 @@ class ApiLink {
   // use store id
   final GET_ALL_PRODUCTS = "/product/products/";
 
+  // get user details,$userId.
+  final GET_USER_DETAILS = "/user/";
+
   final GET_CART_PRODUCT = "/cart/";
 
   final ADD_ITEM_CART = "/cart/add-item/";
@@ -29,4 +32,10 @@ class ApiLink {
   final GET_SINGLE_PRODUCT = "/product/";
 
   final GET_ALL_PRODUCT_ALL_STORE = "/product/products";
+
+  // clear cart
+  //final CLEAR_CART = "/cart/";
+
+  //create new order
+  final CREATE_NEW_ORDER = "/order";
 }
