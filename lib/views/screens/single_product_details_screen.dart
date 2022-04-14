@@ -120,39 +120,39 @@ class ProductDetailsScreen extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  Container(
-                    width: _size.width * 0.4,
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => states.contains(MaterialState.pressed)
-                            ? Colors.grey
-                            : primaryColor,
-                      )),
-                      onPressed: () {},
-                      child: const Text("Buy now"),
-                    ),
-                  ),
-                  Container(
-                    width: _size.width * 0.4,
-                    height: 60,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.resolveWith(
-                        (states) => states.contains(MaterialState.pressed)
-                            ? Colors.grey
-                            : primaryColor,
-                      )),
-                      onPressed: () {},
-                      child: const Text("Add to cart"),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: <Widget>[
+              //     Container(
+              //       width: _size.width * 0.4,
+              //       height: 60,
+              //       child: ElevatedButton(
+              //         style: ButtonStyle(
+              //             backgroundColor: MaterialStateProperty.resolveWith(
+              //           (states) => states.contains(MaterialState.pressed)
+              //               ? Colors.grey
+              //               : primaryColor,
+              //         )),
+              //         onPressed: () {},
+              //         child: const Text("Buy now"),
+              //       ),
+              //     ),
+              //     Container(
+              //       width: _size.width * 0.4,
+              //       height: 60,
+              //       child: ElevatedButton(
+              //         style: ButtonStyle(
+              //             backgroundColor: MaterialStateProperty.resolveWith(
+              //           (states) => states.contains(MaterialState.pressed)
+              //               ? Colors.grey
+              //               : primaryColor,
+              //         )),
+              //         onPressed: () {},
+              //         child: const Text("Add to cart"),
+              //       ),
+              //     ),
+              //   ],
+              // ),
               screen == SingleProductScreen.allProductsScreen
                   ? const SizedBox(
                       height: 40,

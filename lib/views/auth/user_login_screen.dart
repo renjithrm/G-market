@@ -82,14 +82,6 @@ class AuthScreen extends StatelessWidget {
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(
-                      "Get started",
-                      style: GoogleFonts.roboto(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    colDiv(7),
                     formField(
                         controller: emailController,
                         keyboardType: TextInputType.emailAddress,
@@ -102,7 +94,7 @@ class AuthScreen extends StatelessWidget {
                           Icons.email,
                           color: Colors.black,
                         )),
-                    colDiv(7),
+                    const Spacer(),
                     GetBuilder<Controller>(
                         id: "passIcon",
                         builder: (_) {
@@ -135,7 +127,7 @@ class AuthScreen extends StatelessWidget {
                             obscureText: _controller.obscureText,
                           );
                         }),
-                    colDiv(15),
+                    const Spacer(),
                     Container(
                       alignment: Alignment.center,
                       child: CostumButton(
@@ -170,7 +162,7 @@ class AuthScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    colDiv(7),
+                    const Spacer(),
                     Container(
                       alignment: Alignment.center,
                       child: TextButton(

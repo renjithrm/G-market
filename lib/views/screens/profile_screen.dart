@@ -2,12 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_app/constant/const.dart';
+import 'package:user_app/controller/get_user_order.dart';
 import 'package:user_app/service/shared_preference.dart';
+import 'package:user_app/views/screens/order_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  ProfileScreen({Key? key}) : super(key: key);
+
+  final _getUserOrder = Get.put(GetUsetOrder());
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +47,21 @@ class ProfileScreen extends StatelessWidget {
                   SaveId.delectId();
                   Navigator.of(context).restorablePushNamedAndRemoveUntil(
                       "/swtich", (route) => false);
+                },
+              ),
+              ListTile(
+                leading: FaIcon(
+                  Icons.production_quantity_limits,
+                ),
+                title: Text(
+                  "My Orders",
+                  style: GoogleFonts.roboto(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () async {
+                  await Get.to(OrderScreen());
                 },
               )
             ],

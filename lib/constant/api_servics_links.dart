@@ -38,4 +38,8 @@ class ApiLink {
 
   //create new order
   final CREATE_NEW_ORDER = "/order";
+
+  //get all order by user id
+
+  final GET_ORDER_USER = "/order/user/";
 }

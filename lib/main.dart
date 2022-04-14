@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:user_app/constant/globel_keys.dart';
 import 'package:user_app/service/shared_preference.dart';
@@ -7,10 +6,14 @@ import 'package:user_app/views/auth/wraper.dart';
 import 'package:user_app/views/screens/home_screen.dart';
 import 'package:user_app/views/screens/payment_screen.dart';
 import 'package:user_app/views/screens/profile_screen.dart';
+import 'package:native_notify/native_notify.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await SaveId.init();
+
+  NativeNotify.initialize(519, 'VqJUy7sfjvcktZBNbXLo5o', null);
 
   runApp(const MyApp());
 }
