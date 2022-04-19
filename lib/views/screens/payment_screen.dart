@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_app/constant/const.dart';
+import 'package:user_app/controller/get_cart_products.dart';
 import 'package:user_app/controller/get_user_deatails_controller.dart';
 import 'package:user_app/controller/payment_controller.dart';
 
@@ -123,7 +124,9 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            print("in");
                             await _paymentController.openCheckout();
+                            print("out");
                           } else {
                             Fluttertoast.showToast(
                               msg: "Fil all box",

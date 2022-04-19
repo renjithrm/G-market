@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:razorpay_flutter/razorpay_flutter.dart';
 import 'package:user_app/constant/api_servics_links.dart';
 import 'package:user_app/constant/globel_keys.dart';
+import 'package:user_app/controller/get_cart_products.dart';
 import 'package:user_app/controller/get_user_deatails_controller.dart';
 import 'package:user_app/service/api_service.dart';
 import 'package:user_app/service/shared_preference.dart';
@@ -15,6 +16,7 @@ class PaymentController extends GetxController {
   late Razorpay _razorpay;
 
   final _getUserDetails = Get.find<GetUserdetails>();
+
   final _apiLink = ApiLink();
   final _apiServise = ApiServics();
 
@@ -23,6 +25,7 @@ class PaymentController extends GetxController {
   final phoneNumberController = TextEditingController();
   final addressController = TextEditingController();
   var userId = SaveId.getId();
+  final _cartProductController = Get.find<GetCartProductController>();
 
   @override
   void onInit() {
@@ -48,7 +51,7 @@ class PaymentController extends GetxController {
 
   _handlePaymentSuccess(PaymentSuccessResponse response) async {
     print(" payment Id:::::::::${response.paymentId}");
-    navigatorKey.currentState!.pop();
+
     var userData = {
       "userid": userId,
       "paymentid": response.paymentId,
@@ -60,6 +63,11 @@ class PaymentController extends GetxController {
         await _apiServise.postData(_apiLink.CREATE_NEW_ORDER, userData);
     log("apiResponse:::::$apiResponse");
 
+    navigatorKey.currentState!
+        .restorablePushNamedAndRemoveUntil("/home", (route) => false);
+    await _apiServise.delectItems(url: _apiLink.GET_CART_PRODUCT + userId);
+    _cartProductController.cartModel.clear();
+    _cartProductController.update(["cartScreen"]);
     if (apiResponse == null) {
       await Fluttertoast.showToast(
         msg: "some error",

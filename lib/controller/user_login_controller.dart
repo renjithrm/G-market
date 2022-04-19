@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:native_notify/native_notify.dart';
+
 import 'package:user_app/constant/api_servics_links.dart';
 import 'package:user_app/service/api_service.dart';
 
@@ -14,7 +16,10 @@ class UserLoginController extends GetxController {
         await _apiService.postData(_apiLinks.USER_LOGIN_URL, userData);
     if (jsonResponse == null) return null;
     var responseData = jsonDecode(jsonResponse);
-    // print(responseData);
+    print(responseData);
+    print(responseData["_id"]);
+    NativeNotify.registerIndieID(responseData["_id"]);
+
     return responseData;
   }
 
@@ -34,7 +39,8 @@ class UserLoginController extends GetxController {
         await _apiService.postData(_apiLinks.USER_REGISTER, userData);
     if (response == null) return null;
     var jsonData = jsonDecode(response);
-    // print(jsonData);
+    print(jsonData["_id"]);
+    NativeNotify.registerIndieID(jsonData["_id"]);
     return jsonData;
   }
 }

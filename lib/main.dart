@@ -13,7 +13,8 @@ void main() async {
 
   await SaveId.init();
 
-  NativeNotify.initialize(519, 'VqJUy7sfjvcktZBNbXLo5o', null);
+  NativeNotify.initialize(519, 'VqJUy7sfjvcktZBNbXLo5o',
+      "AAAAs612yf0:APA91bGX_WlIlpNJ30tqRXZ9jfQqLINAyTe2819I505C1q-_OKIQtHPHyhp5eibSog7mCnZRBmCzWdXFLYffN-0FJyTqtU3X7FfAcw5CtYvG-U1pdvRnZcnbX3IFWec1aEyb-52kZLDO");
 
   runApp(const MyApp());
 }
